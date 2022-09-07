@@ -28,9 +28,6 @@ export class LayoutdetailsComponent implements OnInit {
     getParamsId() {
     this.activatedRoute.paramMap.subscribe(paramMap => {
       this.currentId = paramMap.get('id');
-      if(this.currentId == 0 || this.currentId > this.layoutData.length){
-        this.router.navigate(['/**']);
-      }
     });
   }
   /**
