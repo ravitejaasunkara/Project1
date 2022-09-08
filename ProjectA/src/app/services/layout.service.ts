@@ -9,12 +9,13 @@ export class LayoutService {
   constructor(private http:HttpClient) { }
   baseUrl = 'https://collab-blog-default-rtdb.firebaseio.com/blogs.json';
 
- /**
-  * It returns an observable of the author data
-  * @returns An observable
-  */
+ 
+  /**
+   * The function getAuthorData() returns an observable of type any[]
+   * @returns An array of objects.
+   */
   getAuthorData(){
-    return this.http.get(this.baseUrl);
+    return this.http.get<any[]>(this.baseUrl);
   }
 
 }

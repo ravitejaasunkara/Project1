@@ -11,33 +11,48 @@ import { LayoutService } from '../services/layout.service';
 export class LayoutdetailsComponent implements OnInit {
 
 
-  constructor(private layoutService: LayoutService, private activatedRoute: ActivatedRoute,private router: Router) { }
+  constructor(private layoutService: LayoutService, private activatedRoute: ActivatedRoute, private router: Router) { }
   //variable declarations
   layoutData: Layout[] = [];
   currentId!: any;
   currentData: any = [];
 
+  /**
+   * The function is called when the component is initialized. It calls two other functions,
+   * getAuthorsData() and getParamsId().
+   */
   ngOnInit(): void {
     this.getAuthorsData();
     this.getParamsId();
+    //console.log(this.layoutData.length);
   }
 
   /**
    * The function gets the id from the url and assigns it to the currentId variable
    */
-    getParamsId() {
+  getParamsId() {
     this.activatedRoute.paramMap.subscribe(paramMap => {
       this.currentId = paramMap.get('id');
     });
   }
+  
   /**
-   * The function is called getAuthorsData() and it is a function that is called when the component is
-   * loaded. It calls the getAuthorData() function in the layoutService.ts file and then assigns the
-   * response to the layoutData variable
+   * I'm using the layoutService to get the data from the database and then I'm pushing the data into
+   * the layoutData array.
    */
   getAuthorsData() {
     this.layoutService.getAuthorData().subscribe(res => {
-      this.layoutData = <Array<Layout>>res;
+      res.forEach(item => {
+        let ld = new Layout();
+        ld.authorName = item.authorName;
+        ld.authorProfilePic = item.authorProfilePic;
+        ld.id = item.id;
+        ld.postDescription = item.postDescription;
+        ld.postImageUrl = item.postImageUrl;
+        ld.postTitle = item.postTitle;
+        ld.publishedDate = item.publishedDate;
+        this.layoutData.push(ld);
+      })
     })
   }
 
