@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { WildcardComponent } from './wildcard/wildcard.component';
 import { LayoutdetailsComponent } from './layoutdetails/layoutdetails.component';
+import { LayoutdetailseditComponent } from './layoutdetailsedit/layoutdetailsedit.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { LayoutdetailsComponent } from './layoutdetails/layoutdetails.component'
     LayoutComponent,
     HomeComponent,
     WildcardComponent,
-    LayoutdetailsComponent
+    LayoutdetailsComponent,
+    LayoutdetailseditComponent
   ],
   imports: [
     BrowserModule,
