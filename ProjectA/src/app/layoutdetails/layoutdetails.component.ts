@@ -13,9 +13,10 @@ export class LayoutdetailsComponent implements OnInit {
 
   constructor(private layoutService: LayoutService, private activatedRoute: ActivatedRoute, private router: Router) { }
   //variable declarations
-  layoutData: Layout[] = [];
+  layoutData:any[] = [];
   currentId!: any;
   currentData: any = [];
+  dataCount:number = 0;
 
   /**
    * The function is called when the component is initialized. It calls two other functions,
@@ -24,12 +25,12 @@ export class LayoutdetailsComponent implements OnInit {
   ngOnInit(): void {
     this.getAuthorsData();
     this.getParamsId();
-    //console.log(this.layoutData.length);
   }
 
-  /**
-   * The function gets the id from the url and assigns it to the currentId variable
-   */
+
+/**
+ * It gets the id from the url and assigns it to the currentId variable.
+ */
   getParamsId() {
     this.activatedRoute.paramMap.subscribe(paramMap => {
       this.currentId = paramMap.get('id');
@@ -43,6 +44,7 @@ export class LayoutdetailsComponent implements OnInit {
   getAuthorsData() {
     this.layoutService.getAuthorData().subscribe(res => {
       res.forEach(item => {
+        this.dataCount += 1;
         let ld = new Layout();
         ld.authorName = item.authorName;
         ld.authorProfilePic = item.authorProfilePic;
