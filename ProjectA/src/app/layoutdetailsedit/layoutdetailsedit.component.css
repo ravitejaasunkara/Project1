@@ -1,14 +1,26 @@
-/* .buttons{
-    display: flex;
-    justify-content: space-between;
-} */
-button{
-    width: 120px;
-}
-.main{
-    width: 50%;
+.textdiv{
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: center !important;
+}
+h2{
+    margin-top: 20px;
+}
+.btn-div{
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+button{
+    width: 40%;
+}
+@media only screen and (max-width: 1200px){
+    /*Tablets [601px -> 1200px]*/
+}
+@media only screen and (max-width: 600px){
+	/*Big smartphones [426px -> 600px]*/
+}
+@media only screen and (max-width: 425px){
+	/*Small smartphones [325px -> 425px]*/
 }

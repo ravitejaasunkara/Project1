@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Layout } from '../models/layout';
 import { LayoutService } from '../services/layout.service';
-
+var $:any;
 @Component({
   selector: 'app-layoutdetailsedit',
   templateUrl: './layoutdetailsedit.component.html',
@@ -20,6 +20,11 @@ export class LayoutdetailseditComponent implements OnInit {
 
   layoutData: Layout[] = [];
   editId !:any;
+  errorMessage = '';
+  successMessage = '';
+  emptyText = false;
+  notEmptyText = false;
+  @ViewChild('mainText') mainText!: ElementRef;
 
   /**
    * We're getting the id from the url params and then calling the getLayoutDetails() function
@@ -27,6 +32,7 @@ export class LayoutdetailseditComponent implements OnInit {
   ngOnInit(): void {
     this.getEditIdFromParams();
     this.getLayoutDetails();
+    
   }
 
   /**
@@ -55,6 +61,26 @@ export class LayoutdetailseditComponent implements OnInit {
         this.layoutData.push(ld);
       })
     })
+  }
+
+  onBlur(event:any){
+    if(event.target.value == ''){
+      
+      
+    }
+  }
+  Save(){
+    this.emptyText = false;
+    this.notEmptyText = false;
+    var txt = this.mainText.nativeElement.value;
+    if(txt == ''){
+      this.emptyText = true;
+      this.errorMessage = 'Bro please enter some text';
+    }
+    else{
+      this.notEmptyText = true;
+      this.successMessage = 'Changes succesfully saved.'
+    }
   }
 
 }

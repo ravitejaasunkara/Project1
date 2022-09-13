@@ -17,6 +17,7 @@ export class LayoutdetailsComponent implements OnInit {
   currentId!: any;
   currentData: any = [];
   dataCount:number = 0;
+  currData!:Layout;
 
   /**
    * The function is called when the component is initialized. It calls two other functions,
@@ -24,6 +25,7 @@ export class LayoutdetailsComponent implements OnInit {
    */
   ngOnInit(): void {
     this.getAuthorsData();
+    //console.log(this.layoutData)
     this.getParamsId();
   }
 
@@ -44,7 +46,7 @@ export class LayoutdetailsComponent implements OnInit {
   getAuthorsData() {
     this.layoutService.getAuthorData().subscribe(res => {
       res.forEach(item => {
-        this.dataCount += 1;
+        //console.log(item)
         let ld = new Layout();
         ld.authorName = item.authorName;
         ld.authorProfilePic = item.authorProfilePic;
@@ -54,10 +56,14 @@ export class LayoutdetailsComponent implements OnInit {
         ld.postTitle = item.postTitle;
         ld.publishedDate = item.publishedDate;
         this.layoutData.push(ld);
+        this.currData = this.layoutData.find(item => item.id == this.currentId);
+        //console.log(this.currData);
       })
     })
   }
 
-
+  getCurrentData(){
+    this.currData = this.layoutData.find(item => item.id == this.currentId);
+  }
 
 }
